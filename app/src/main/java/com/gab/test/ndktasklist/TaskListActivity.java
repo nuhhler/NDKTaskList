@@ -42,9 +42,26 @@ public class TaskListActivity extends Activity {
                 newTaskName.setText("");
 
                 //Core.addTask( Task.toString(( new Task( text ) ) ) );
-                int last = Core.getNmbTasks() - 1;
+//                int last = Core.getNmbTasks();
 
-                //Task ret = Task.fromString( Core.getTask( last ) );
+                try {
+                    int last = Core.getNmbTasks();
+//                    Core anObj = new Core();
+//                    int last = anObj.getNmbTasks();
+                    int a = last + 1;
+                }
+                catch (UnsatisfiedLinkError ex)
+                {
+                    String aMes = ex.getMessage();
+                    int a = 3+3;
+                }
+                catch (Throwable ex )
+                {
+                    String aMes = ex.getMessage();
+                    int a = 6 + 4;
+                }
+
+               // Task ret = Task.fromString( Core.getTask( last ) );
 
                 //String[] arrRet = Core.getTasks( 0, last );
 

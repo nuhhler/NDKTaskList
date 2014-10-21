@@ -4,8 +4,15 @@
 //#include <string>
 //#include <vector>
 
+//JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
+//  (JNIEnv *, jobject)
+//  {
+//    //return Storage::getInstance().getSize();
+//    return 5;
+//  }
+
 JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
-  (JNIEnv *, jobject)
+  (JNIEnv *, jclass)
   {
     //return Storage::getInstance().getSize();
     return 5;

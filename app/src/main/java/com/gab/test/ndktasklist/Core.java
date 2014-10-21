@@ -6,9 +6,21 @@ package com.gab.test.ndktasklist;
 public class Core {
 
     static {
-        System.loadLibrary( "core");
+        //System.loadLibrary( "core");
+        try {
+            System.loadLibrary("core");
+        }
+        catch (UnsatisfiedLinkError ex)
+        {
+            String aMes = ex.getMessage();
+        }
+        catch (Throwable ex )
+        {
+            String aMes = ex.getMessage();
+        }
     }
 
+    //public native int getNmbTasks();
     public static native int getNmbTasks();
     //public static native void addTask( String serializedTask );
     //public static native String getTask( int index );

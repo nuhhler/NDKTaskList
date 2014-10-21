@@ -18,7 +18,7 @@ android {
     buildToolsVersion "20.0.0"
 
     sourceSets.main {
-        // jniLibs.srcDir 'src/main/libs' // use this for minimizing size of .apk file
+        jniLibs.srcDir 'src/main/libs' // use this for minimizing size of .apk file
         jni.srcDirs = [] //disable automatic ndk-build call
     }
 
@@ -26,31 +26,31 @@ android {
         applicationId "com.gab.test.ndktasklist"
         minSdkVersion 15
         targetSdkVersion 20
-        versionCode getVersionCodeFromManifest()
-        versionName "1.0"
+        versionCode 1
+        versionName '1.0.1'
     }
 
     productFlavors {
         x86 {
-            versionCode Integer.parseInt("6" + defaultConfig.versionCode)
+            //versionCode Integer.parseInt("6" + defaultConfig.versionCode)
             ndk {
                 abiFilter "x86"
             }
         }
         mips {
-            versionCode Integer.parseInt("4" + defaultConfig.versionCode)
+            //versionCode Integer.parseInt("4" + defaultConfig.versionCode)
             ndk {
                 abiFilter "mips"
             }
         }
         armv7 {
-            versionCode Integer.parseInt("2" + defaultConfig.versionCode)
+            //versionCode Integer.parseInt("2" + defaultConfig.versionCode)
             ndk {
                 abiFilter "armeabi-v7a"
             }
         }
         arm {
-            versionCode Integer.parseInt("1" + defaultConfig.versionCode)
+            //versionCode Integer.parseInt("1" + defaultConfig.versionCode)
             ndk {
                 abiFilter "armeabi"
             }
@@ -70,21 +70,21 @@ android {
     }
 }
 
-task nativeLibsToJar(type: Zip, description: 'create a jar archive of the native libs') {
-    destinationDir file("$buildDir/native-libs")
-    baseName 'native-libs'
-    extension 'jar'
-    from fileTree(dir: 'src/main/libs', include: '**/*.so')
-    into 'lib/'
-}
-
-tasks.withType(Compile) {
-    compileTask -> compileTask.dependsOn(nativeLibsToJar)
-}
+//task nativeLibsToJar(type: Zip, description: 'create a jar archive of the native libs') {
+//    destinationDir file("$buildDir/native-libs")
+//    baseName 'native-libs'
+//    extension 'jar'
+//    from fileTree(dir: 'src/main/libs', include: '**/*.so')
+//    into 'lib/'
+//}
+//
+//tasks.withType(Compile) {
+//    compileTask -> compileTask.dependsOn nativeLibsToJar
+//}
 
 dependencies {
-    //compile fileTree(dir: 'libs', include: ['*.jar']) // use this for minimizing size of .apk file
-    compile fileTree(dir: "$buildDir/native-libs", include: 'native-libs.jar')
+//    compile fileTree(dir: "$buildDir/native-libs", include: 'native-libs.jar')
+   compile fileTree(dir: 'libs', include: ['*.jar']) // use this for minimizing size of .apk file
 }
 
 def getVersionCodeFromManifest() {
