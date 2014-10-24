@@ -8,13 +8,17 @@ Storage& Storage::getInstance()
 
 int Storage::getSize() const
 {
-   //return taskList.size();
-   return 5;
+   return taskList.size();
 }
 
 void Storage::addTask( string theSerializedTask)
 {
    taskList.push_back( theSerializedTask );
+}
+
+void Storage::addTasks( vector<string> theTasks )
+{
+   taskList.insert( taskList.end(), theTasks.begin(), theTasks.end() );
 }
 
 string Storage::getTask( int index ) const
@@ -25,9 +29,10 @@ string Storage::getTask( int index ) const
 vector<string> Storage::getTasks( int first, int last) const
 {
    vector<string> ret( last-first );
-   for( int i = first; i<=last ; i++)
-   {
-      ret.push_back( taskList.at(i) );
-   }
+   copy( taskList.begin() + first, taskList.begin() + last, ret.begin() );
+//   for( int i = first; i<last ; i++)
+//   {
+//      ret.push_back( taskList.at(i) );
+//   }
    return ret;
 }

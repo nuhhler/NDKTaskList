@@ -20,11 +20,10 @@ public class Core {
         }
     }
 
-    //public native int getNmbTasks();
     public static native int getNmbTasks();
-    //public static native void addTask( String serializedTask );
-    //public static native String getTask( int index );
-    //public static native String[] getTasks( int first, int last);
-//    public static native void addTask( String[] serializedTasks );
+    public static native void addTask( String serializedTask );
+    public static native String getTask( int index );
+    public static native String[] getTasks( int first, int last);
+    public static native void addTasks( String[] serializedTasks );
 
 }

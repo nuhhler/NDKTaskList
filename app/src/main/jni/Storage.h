@@ -16,6 +16,7 @@ public :
 
    int getSize() const;
    void addTask( string theSerializedTask );
+   void addTasks( vector<string> theTasks );
    string getTask( int index ) const;
    vector<string> getTasks( int first, int last) const;
 

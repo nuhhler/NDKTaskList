@@ -41,29 +41,26 @@ public class TaskListActivity extends Activity {
                 String text = newTaskName.getText().toString();
                 newTaskName.setText("");
 
-                //Core.addTask( Task.toString(( new Task( text ) ) ) );
-//                int last = Core.getNmbTasks();
-
                 try {
-                    int last = Core.getNmbTasks();
-//                    Core anObj = new Core();
-//                    int last = anObj.getNmbTasks();
+                    Task testTask = new Task( text );
+                    Core.addTask( Task.toString( testTask) );
+                    int last = Core.getNmbTasks() - 1 ;
+                    String res = Core.getTask( last );
+                    Task resTask = Task.fromString( res );
+
+                    String[] arr = new String[] { "hello", "world" };
+                    Core.addTasks( arr );
+                    String[] resArr = Core.getTasks( 0, Core.getNmbTasks() );
                     int a = last + 1;
                 }
                 catch (UnsatisfiedLinkError ex)
                 {
                     String aMes = ex.getMessage();
-                    int a = 3+3;
                 }
                 catch (Throwable ex )
                 {
                     String aMes = ex.getMessage();
-                    int a = 6 + 4;
                 }
-
-               // Task ret = Task.fromString( Core.getTask( last ) );
-
-                //String[] arrRet = Core.getTasks( 0, last );
 
                 Map<String, Object> m = new HashMap<String, Object>();
                 m.put( ATTRIBUTE_NAME_TEXT, text);

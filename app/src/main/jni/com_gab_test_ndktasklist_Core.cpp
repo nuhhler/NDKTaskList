@@ -1,21 +1,13 @@
 #include "com_gab_test_ndktasklist_Core.h"
 
-//#include <Storage.h>
-//#include <string>
-//#include <vector>
-
-//JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
-//  (JNIEnv *, jobject)
-//  {
-//    //return Storage::getInstance().getSize();
-//    return 5;
-//  }
+#include <Storage.h>
+#include <string>
+#include <vector>
 
 JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
   (JNIEnv *, jclass)
   {
-    //return Storage::getInstance().getSize();
-    return 5;
+    return Storage::getInstance().getSize();
   }
 
 /*
@@ -23,26 +15,26 @@ JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
  * Method:    addTask
  * Signature: (Ljava/lang/String;)V
  */
-//JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTask
-//  (JNIEnv * pEnv, jobject obj, jstring theTask)
-//  {
-//     const char* tmpStr =  pEnv->GetStringUTFChars( theTask, NULL);
-//
-//     Storage::getInstance().addTask( std::string( tmpStr ) );
-//
-//     pEnv->ReleaseStringUTFChars( theTask, tmpStr);
-//  }
+ JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTask
+   (JNIEnv *pEnv, jclass, jstring theTask)
+  {
+     const char* tmpStr =  pEnv->GetStringUTFChars( theTask, NULL);
+
+     Storage::getInstance().addTask( std::string( tmpStr ) );
+
+     pEnv->ReleaseStringUTFChars( theTask, tmpStr);
+  }
 //
 ///*
 // * Class:     com_gab_test_ndktasklist_Core
 // * Method:    getTask
 // * Signature: (I)Ljava/lang/String;
 // */
-//JNIEXPORT jstring JNICALL Java_com_gab_test_ndktasklist_Core_getTask
-//  (JNIEnv *pEnv, jobject obj, jint index)
-//  {
-//    return pEnv->NewStringUTF( Storage::getInstance().getTask(index).c_str() );
-//  }
+JNIEXPORT jstring JNICALL Java_com_gab_test_ndktasklist_Core_getTask
+  (JNIEnv *pEnv, jclass , jint index)
+  {
+    return pEnv->NewStringUTF( Storage::getInstance().getTask(index).c_str() );
+  }
 
 
 /*
@@ -50,27 +42,37 @@ JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
  * Method:    getTasks
  * Signature: (II)[Ljava/lang/String;
  */
-//JNIEXPORT jobjectArray JNICALL Java_com_gab_test_ndktasklist_Core_getTasks
-//  (JNIEnv *pEnv , jclass cl, jint first, jint last)
-//  {
-//     jobjectArray ret;
-//     const vector<string>& res = Storage::getInstance().getTasks( first, last );
-//
-//     ret= (jobjectArray)pEnv->NewObjectArray( res.size(), pEnv->FindClass("java/lang/String"),
-//                                                          pEnv->NewStringUTF(""));
-//
-//     for(int i=0; i<res.size(); i++ )
-//     {
-//         pEnv->SetObjectArrayElement( ret, i, pEnv->NewStringUTF( res[i].c_str() ) );
-//     }
-//
-//     return ret;
-//  }
+JNIEXPORT jobjectArray JNICALL Java_com_gab_test_ndktasklist_Core_getTasks
+  (JNIEnv *pEnv , jclass cl, jint first, jint last)
+  {
+     const vector<string>& res = Storage::getInstance().getTasks( first, last );
+
+     jclass lStringClass = pEnv->FindClass("java/lang/String");
+     jobjectArray ret = (jobjectArray)pEnv->NewObjectArray( res.size(), lStringClass, NULL);
+     pEnv->DeleteLocalRef( lStringClass );
+
+     for(int i=0; i<res.size(); i++ )
+     {
+         pEnv->SetObjectArrayElement( ret, i, pEnv->NewStringUTF( res[i].c_str() ) );
+     }
+
+     return ret;
+  }
 
 /*
  * Class:     com_gab_test_ndktasklist_Core
- * Method:    addTask
+ * Method:    addTasks
  * Signature: ([Ljava/lang/String;)V
  */
-//JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTask___3Ljava_lang_String_2
-//  (JNIEnv *, jclass, jobjectArray);
+JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTasks
+  (JNIEnv * pEnv, jclass, jobjectArray theTasks)
+  {
+     int stringCount = pEnv->GetArrayLength(theTasks);
+     for (int i=0; i<stringCount; i++)
+     {
+         jstring jStr = (jstring) pEnv->GetObjectArrayElement( theTasks, i );
+         const char * cStr = pEnv->GetStringUTFChars( jStr, NULL );
+         Storage::getInstance().addTask( std::string( cStr ) );
+         pEnv->ReleaseStringUTFChars( jStr, cStr);
+     }
+  }

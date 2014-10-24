@@ -15,6 +15,38 @@ extern "C" {
 JNIEXPORT jint JNICALL Java_com_gab_test_ndktasklist_Core_getNmbTasks
   (JNIEnv *, jclass);
 
+/*
+ * Class:     com_gab_test_ndktasklist_Core
+ * Method:    addTask
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTask
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_gab_test_ndktasklist_Core
+ * Method:    getTask
+ * Signature: (I)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_gab_test_ndktasklist_Core_getTask
+  (JNIEnv *, jclass, jint);
+
+/*
+ * Class:     com_gab_test_ndktasklist_Core
+ * Method:    getTasks
+ * Signature: (II)[Ljava/lang/String;
+ */
+JNIEXPORT jobjectArray JNICALL Java_com_gab_test_ndktasklist_Core_getTasks
+  (JNIEnv *, jclass, jint, jint);
+
+/*
+ * Class:     com_gab_test_ndktasklist_Core
+ * Method:    addTasks
+ * Signature: ([Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_gab_test_ndktasklist_Core_addTasks
+  (JNIEnv *, jclass, jobjectArray);
+
 #ifdef __cplusplus
 }
 #endif
