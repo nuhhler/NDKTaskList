@@ -54,6 +54,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_gab_test_ndktasklist_Core_getTasks
      for(int i=0; i<res.size(); i++ )
      {
          pEnv->SetObjectArrayElement( ret, i, pEnv->NewStringUTF( res[i].c_str() ) );
+         // deleteLocalRef of inserted string?..
      }
 
      return ret;

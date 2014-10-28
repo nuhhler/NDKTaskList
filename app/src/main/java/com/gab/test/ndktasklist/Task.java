@@ -10,14 +10,20 @@ import java.io.Serializable;
 public class Task implements Serializable{
     public Boolean isDone;
     public String Name;
+    public int id;
+
+    private static int counter = 0;
 
 
     public Task ( String Name )
     {
         this.Name = Name;
         this.isDone = false;
+        id = counter;
+        counter += 1;
     }
 
+    // todo should be refactoring with using id
     static String toString( Task task )
     {
         return "Task{" +
@@ -26,6 +32,7 @@ public class Task implements Serializable{
                 '}';
     }
 
+    // todo should be refactoring with using id
     static Task fromString( String data )
     {
         String Name = data.substring( data.indexOf("'")+1, data.lastIndexOf("'"));
