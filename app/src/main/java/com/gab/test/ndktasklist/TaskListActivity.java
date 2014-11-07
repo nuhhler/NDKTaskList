@@ -2,6 +2,7 @@ package com.gab.test.ndktasklist;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +25,8 @@ public class TaskListActivity extends Activity {
 
     final String ATTRIBUTE_NAME_CHECKED = "checked";
     final String ATTRIBUTE_NAME_TEXT = "text";
+
+    static final String LOG_TAG = "Log MainActivity";
 
 
     @Override
@@ -42,16 +44,18 @@ public class TaskListActivity extends Activity {
                 newTaskName.setText("");
 
                 try {
-                    Task testTask = new Task( text );
-                    Core.addTask( Task.toString( testTask) );
-                    int last = Core.getNmbTasks() - 1 ;
-                    String res = Core.getTask( last );
-                    Task resTask = Task.fromString( res );
-
-                    String[] arr = new String[] { "hello", "world" };
-                    Core.addTasks( arr );
-                    String[] resArr = Core.getTasks( 0, Core.getNmbTasks() );
-                    int a = last + 1;
+                    TaskMgr.AddTask( text );
+                    Log.i( LOG_TAG, TaskMgr.GetTask(0) );
+//                    Task testTask = new Task( text, false, 0 );
+//                    TaskMgr.addTask(Task.toString(testTask));
+//                    int last = TaskMgr.getNmbTasks() - 1 ;
+//                    String res = TaskMgr.getTask(last);
+//                    Task resTask = Task.fromString( res );
+//
+//                    String[] arr = new String[] { "hello", "world" };
+//                    TaskMgr.addTasks(arr);
+//                    String[] resArr = TaskMgr.getTasks(0, TaskMgr.getNmbTasks());
+//                    int a = last + 1;
                 }
                 catch (UnsatisfiedLinkError ex)
                 {

@@ -1,5 +1,7 @@
 package com.gab.test.ndktasklist;
 
+import android.util.Log;
+
 import org.w3c.dom.NameList;
 
 import java.io.Serializable;
@@ -8,37 +10,17 @@ import java.io.Serializable;
  * Created by sdv on 30.09.14.
  */
 public class Task implements Serializable{
-    public Boolean isDone;
+    public boolean isDone;
     public String Name;
     public int id;
 
-    private static int counter = 0;
+    static final String LOG_TAG = "Log Task";
 
-
-    public Task ( String Name )
+    public Task ( String Name, boolean isDone, int id )
     {
+        Log.i(LOG_TAG, "create new Task");
         this.Name = Name;
-        this.isDone = false;
-        id = counter;
-        counter += 1;
-    }
-
-    // todo should be refactoring with using id
-    static String toString( Task task )
-    {
-        return "Task{" +
-                "isDone=" + task.isDone +
-                ", Name='" + task.Name + '\'' +
-                '}';
-    }
-
-    // todo should be refactoring with using id
-    static Task fromString( String data )
-    {
-        String Name = data.substring( data.indexOf("'")+1, data.lastIndexOf("'"));
-        Boolean isDone = Boolean.valueOf( data.substring (data.indexOf("=")+1, data.indexOf("'")) );
-        Task res = new Task( Name );
-        res.isDone = isDone;
-        return res;
+        this.isDone = isDone;
+        this.id = id;
     }
 }

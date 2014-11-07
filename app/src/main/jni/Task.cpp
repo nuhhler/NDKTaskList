@@ -28,3 +28,8 @@ int Task::getId() const
 {
     return id;
 }
+
+void Task::setId( int theId )
+{
+    id = theId;
+}

@@ -7,20 +7,23 @@ using std::string;
 class Task
 {
 public :
-   const string& getName() const;
-   void setName( const string& );
 
-   bool isDone() const;
-   void setIsDone( bool );
+   Task( int id, const string& theName, bool theIsDone );
 
-   int getId() const;
+   virtual const string& getName() const;
+   virtual void setName( const string& );
+
+   virtual bool isDone() const;
+   virtual void setIsDone( bool );
+
+   virtual int getId() const;
+   virtual void setId( int theId );
 
 private:
    int id;
    string name;
    bool is_done;
 
-   Task( int id, const string& theName, bool thIsDone );
    Task( const Task& );
    Task& operator= ( const Task& );
 };
